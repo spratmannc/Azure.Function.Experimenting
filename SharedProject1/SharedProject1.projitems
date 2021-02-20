@@ -9,6 +9,7 @@
     <Import_RootNamespace>SharedProject1</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)SomeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Warning.cs" />
+    <Compile Include="..\SharedProject1\Heartbeat.cs" />
   </ItemGroup>
 </Project>

@@ -23,11 +23,42 @@ namespace FunctionApp1
             HttpRequest req
         )
         {
-            var model = await req.ReadAsAsync<SomeModel>();
+            var model = await req.ReadAsAsync<Heartbeat>();
 
-            log.LogInformation("Entry received: {machine}, {date}", model.MachineName, model.UpSince);
+            log.LogWarning("Heartbeat from {machine}", model.MachineName, model.UpSince);
 
             return new OkResult();
+        }
+
+        [FunctionName("Warn")]
+        public async Task<IActionResult> Warn(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]
+            HttpRequest req
+        )
+        {
+            var model = await req.ReadAsAsync<Warning>();
+
+            log.LogError("Warning from {machine}: '{message}'", model.MachineName, model.Message);
+
+            return new OkResult();
+        }
+
+        [FunctionName("GetEventLogFilters")]
+        public IActionResult GetEventLogFilters(
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
+            HttpRequest req
+        )
+        {
+            var filters = new string[]
+            {
+                "One",
+                "Two",
+                "Three"
+            };
+
+            log.LogInformation("Filters requested");
+
+            return new OkObjectResult(filters);
         }
     }
 }

@@ -2,8 +2,7 @@
 
 namespace SharedProject1
 {
-    public class HeartBeat
-
+    public class Heartbeat
     {
         public DateTime UpSince { get; set; }
         public string MachineName { get; set; }

@@ -33,6 +33,8 @@ namespace WorkerService1
                     services.AddTransient<RemoteService>();
 
                     services.AddHostedService<HeartbeatService>();
+                    services.AddHostedService<EventLogWatcherService>();
+                    services.AddHostedService<EventLogWriterService>();
 
                 });
     }

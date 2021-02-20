@@ -1,5 +1,6 @@
 ﻿using SharedProject1;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace WorkerService1.Services
 
         public async Task SendHeartbeat()
         {
-            var message = new SomeModel
+            var message = new Heartbeat
             {
                 MachineName = machineName,
                 UpSince = DateTime.Now
@@ -28,6 +29,22 @@ namespace WorkerService1.Services
             await service.RecordHeartbeat(message);
         }
 
+        public Task<IEnumerable<string>> GetEventLogFilters()
+        {
+            return service.GetEventLogFilters();
+        }
+
+        public Task Warn(string message)
+        {
+            var warning = new Warning
+            {
+                MachineName = machineName,
+                UpSince = DateTime.Now,
+                Message = message
+            };
+
+            return service.Warn(warning);
+        }
 
         private string GetFQDN()
         {
@@ -43,5 +60,7 @@ namespace WorkerService1.Services
 
             return hostName;                        // return the fully qualified name
         }
+
+        
     }
 }
