@@ -61,6 +61,6 @@ namespace WorkerService1.Services
             return hostName;                        // return the fully qualified name
         }
 
-        
+
     }
 }
